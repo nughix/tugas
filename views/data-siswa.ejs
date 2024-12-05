@@ -1,0 +1,73 @@
+<div id="layoutSidenav_content">
+  <main>
+    <div class="container-fluid px-4">
+      <h5 class="mt-4">
+        <div class="shadow p-3 mb-3 bg-black rounded text-danger">Data Siswa</div>
+      </h5>
+      <a href="/data-siswa/add" class="btn btn-sm btn-primary mb-3"
+        ><i class="bi bi-plus"></i> Tambah Data</a>
+      <% if (msg.length !== 0) { %>
+      <div id="myAlert" class="alert alert-success" role="alert">
+        <%= msg %>
+      </div>
+      <% } %>
+
+      <div class="card mb-4 bg-black">
+        <div class="card-header bg-black">
+          <i class="fas fa-table me-1 text-danger"></i>
+        </div>
+        <div class="card shadow bg-black mt-3">
+          <div class="card-body bg-black">
+            <table
+              class="table table-bordered table-hover table-striped"
+            >
+              <thead>
+                <tr>
+                  <th class="text-red-600">No</th>
+                  <th class="text-red-600">Nama</th>
+                  <th class="text-red-600">NISN</th>
+                  <th class="text-red-600">NIK</th>
+                  <th class="text-red-600">No.KK</th>
+                  <th class="text-red-600">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (Dsiswa.length === 0) { %>
+                <tr>
+                  <td colspan="7">
+                    <div class="alert alert-danger fw-bold" role="alert">
+                      Data Siswa/Siswi Masih Kosong
+                    </div>
+                  </td>
+                </tr>
+                <% } %> <% Dsiswa.forEach((siswa, i) => { i++ %>
+                <tr>
+                  <td width="50" class="text-danger"><%= i++ %></td>
+                  <td class="text-danger"><%= siswa.nama %></td>
+                  <td class="text-danger"><%= siswa.nisn %></td>
+                  <td class="text-danger"><%= siswa.nik %></td>
+                  <td class="text-danger"><%= siswa.nokk %></td>
+                  <td class="text-center" width="150">
+                    <a
+                      href="/data-siswa/detail/<%= siswa.nisn %>"
+                      class="btn btn-sm btn-info"
+                      ><i class="bi bi-eye"></i> Detail</a
+                    >
+                    <a
+                      href="/data-siswa/<%= siswa.nisn %>"
+                      class="btn btn-sm btn-danger"
+                      onclick="deleteSiswa('<%= siswa.nisn %>', '<%= siswa.nama %>'); return false;"
+                    >
+                      <i class="bi bi-trash3-fill"></i> Delete
+                    </a>
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
